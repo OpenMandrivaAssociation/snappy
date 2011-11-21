@@ -7,7 +7,7 @@ License:        BSD
 URL:            http://code.google.com/p/snappy/
 Source0:        http://snappy.googlecode.com/files/%{name}-%{version}.tar.gz
 
-BuildRequires:  libgtest-devel
+BuildRequires:  gtest-devel
 
 %description
 Snappy is a compression/decompression library. It does not aim for maximum 
