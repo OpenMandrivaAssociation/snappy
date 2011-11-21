@@ -1,6 +1,6 @@
 Name:           snappy
 Version:        1.0.4
-Release:        1
+Release:        2
 Summary:        Fast compression and decompression library
 Group:          System/Libraries
 License:        BSD
