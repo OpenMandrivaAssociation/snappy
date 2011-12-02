@@ -1,3 +1,8 @@
+%define major   1
+%define libname %mklibname	snappy %major
+%define devname %mklibname	snappy -d
+
+
 Name:           snappy
 Version:        1.0.4
 Release:        2
@@ -17,12 +22,24 @@ the fastest mode of zlib, Snappy is an order of magnitude faster for most
 inputs, but the resulting compressed files are anywhere from 20% to 100% 
 bigger. 
 
-%package        devel
+
+%package -n %libname
+Summary:	Fast compression and decompression library
+Group:		System/Libraries
+
+
+%description -n %libname
+Shared libraries of snappy for software using it.
+
+
+
+
+%package -n	%devname
 Summary:        Development files for %{name}
 Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
 
-%description    devel
+%description -n	%devname
 The %{name}-devel package contains libraries and header files for
 developing applications that use %{name}.
 
@@ -43,11 +60,11 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 %check
 make check
 
-%files
+%files -n %libname
 %doc AUTHORS ChangeLog COPYING NEWS README
 %{_libdir}/libsnappy.so.*
 
-%files devel
+%files -n %devname
 %doc format_description.txt
 %{_includedir}/snappy*.h
 %{_libdir}/libsnappy.so
