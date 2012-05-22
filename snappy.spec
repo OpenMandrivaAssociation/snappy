@@ -5,7 +5,7 @@
 Summary:	Fast compression and decompression library
 Name:		snappy
 Version:	1.0.5
-Release:	1
+Release:	2
 Group:		System/Libraries
 License:	BSD
 URL:		http://code.google.com/p/snappy/
@@ -24,6 +24,7 @@ bigger.
 %package -n %{libname}
 Group:		System/Libraries
 Summary:	Library for %{name}
+%rename		%{name}
 
 %description -n %{libname}
 %{description}
@@ -55,7 +56,7 @@ rm -rf %{buildroot}%{_datadir}/doc/snappy/
 %check
 make check
 
-%files
+%files -n %{libname}
 %doc COPYING 
 %{_libdir}/libsnappy.so.%{major}*
 
