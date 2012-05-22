@@ -1,18 +1,17 @@
-%define major   1
-%define libname %mklibname	snappy %major
-%define devname %mklibname	snappy -d
+%define	major	1
+%define	libname		%mklibname %{name} %{major}
+%define	develname	%mklibname %{name} -d
 
+Summary:	Fast compression and decompression library
+Name:		snappy
+Version:	1.0.5
+Release:	1
+Group:		System/Libraries
+License:	BSD
+URL:		http://code.google.com/p/snappy/
+Source0:	http://snappy.googlecode.com/files/%{name}-%{version}.tar.gz
 
-Name:           snappy
-Version:        1.0.4
-Release:        3
-Summary:        Fast compression and decompression library
-Group:          System/Libraries
-License:        BSD
-URL:            http://code.google.com/p/snappy/
-Source0:        http://snappy.googlecode.com/files/%{name}-%{version}.tar.gz
-
-BuildRequires:  gtest-devel
+BuildRequires:	gtest-devel
 
 %description
 Snappy is a compression/decompression library. It does not aim for maximum 
@@ -22,49 +21,47 @@ the fastest mode of zlib, Snappy is an order of magnitude faster for most
 inputs, but the resulting compressed files are anywhere from 20% to 100% 
 bigger. 
 
-
-%package -n %libname
-Summary:	Fast compression and decompression library
+%package -n %{libname}
 Group:		System/Libraries
+Summary:	Library for %{name}
 
+%description -n %{libname}
+%{description}
 
-%description -n %libname
-Shared libraries of snappy for software using it.
+This package contains shared libraries for %{name}.
 
+%package -n %{develname}
+Summary:	Development files for %{name}
+Group:		Development/C
+Requires:	%{libname} = %{version}-%{release}
 
-
-
-%package -n	%devname
-Summary:        Development files for %{name}
-Group:          Development/Other
-Requires:       %{name} = %{version}-%{release}
-
-%description -n	%devname
-The %{name}-devel package contains libraries and header files for
-developing applications that use %{name}.
+%description -n %{develname}
+This package contains libraries and header files for developing applications 
+that use %{name}.
 
 %prep
 %setup -q
 
 %build
-autoreconf -v --install
+%configure2_5x \
+	--disable-static
 
-%configure CXXFLAGS="%{optflags} -DNDEBUG" --disable-static
 %make
 
 %install
 %makeinstall_std
 rm -rf %{buildroot}%{_datadir}/doc/snappy/
-find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 %check
 make check
 
-%files -n %libname
-%doc AUTHORS ChangeLog COPYING NEWS README
-%{_libdir}/libsnappy.so.*
+%files
+%doc COPYING 
+%{_libdir}/libsnappy.so.%{major}*
 
-%files -n %devname
+%files -n %{develname}
+%doc AUTHORS ChangeLog NEWS README
 %doc format_description.txt
 %{_includedir}/snappy*.h
 %{_libdir}/libsnappy.so
+
