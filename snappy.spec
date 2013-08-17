@@ -4,8 +4,8 @@
 
 Summary:	Fast compression and decompression library
 Name:		snappy
-Version:	1.0.5
-Release:	2
+Version:	1.1.0
+Release:	1
 Group:		System/Libraries
 License:	BSD
 URL:		http://code.google.com/p/snappy/
