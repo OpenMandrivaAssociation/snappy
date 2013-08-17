@@ -40,6 +40,7 @@ This package contains shared libraries for %{name}.
 Summary:	Development files for %{name}
 Group:		Development/C
 Requires:	%{libname} = %{version}-%{release}
+Provides:	%{name}-devel = %{version}-%{release}
 
 %description -n %{develname}
 This package contains libraries and header files for developing applications 
