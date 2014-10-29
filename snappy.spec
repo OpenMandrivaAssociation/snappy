@@ -4,8 +4,8 @@
 
 Summary:	Fast compression and decompression library
 Name:		snappy
-Version:	1.1.0
-Release:	7
+Version:	1.1.2
+Release:	1
 Group:		System/Libraries
 License:	BSD
 URL:		http://code.google.com/p/snappy/
@@ -71,26 +71,3 @@ make check
 %doc format_description.txt
 %{_includedir}/snappy*.h
 %{_libdir}/libsnappy.so
-
-
-
-%changelog
-* Tue May 22 2012 Matthew Dawkins <mattydaw@mandriva.org> 1.0.5-2
-+ Revision: 800143
-- rebuid fixed lib pkg name
-
-* Tue May 22 2012 Matthew Dawkins <mattydaw@mandriva.org> 1.0.5-1
-+ Revision: 800121
-- imported package snappy
-
-* Fri Dec 02 2011 Alexander Khrukin <akhrukin@mandriva.org> 1.0.4-3
-+ Revision: 737249
-- release bump
-- Fixes accroding to Mandriva library packaging policy #64877
-
-* Tue Nov 22 2011 Alexander Khrukin <akhrukin@mandriva.org> 1.0.4-2
-+ Revision: 732268
-- BS fix
-- BS fix
-- imported package snappy
-
