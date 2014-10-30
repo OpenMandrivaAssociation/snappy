@@ -4,8 +4,8 @@
 
 Summary:	Fast compression and decompression library
 Name:		snappy
-Version:	1.1.0
-Release:	7
+Version:	1.1.2
+Release:	1
 Group:		System/Libraries
 License:	BSD
 URL:		http://code.google.com/p/snappy/
@@ -50,8 +50,9 @@ that use %{name}.
 %setup -q
 
 %build
-%configure2_5x \
-	--disable-static
+export CC=gcc
+export CXX=g++
+%configure
 
 %make
 
