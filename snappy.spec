@@ -4,12 +4,12 @@
 
 Summary:	Fast compression and decompression library
 Name:		snappy
-Version:	1.1.2
-Release:	3
+Version:	1.1.3
+Release:	1
 Group:		System/Libraries
 License:	BSD
-URL:		http://code.google.com/p/snappy/
-Source0:	http://snappy.googlecode.com/files/%{name}-%{version}.tar.gz
+URL:		http://google.github.io/snappy/
+Source0:	http://github.com/google/snappy/releases/download/%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires:	gtest-devel
 
