@@ -1,10 +1,10 @@
-%define	major	1
-%define	libname		%mklibname %{name} %{major}
-%define	develname	%mklibname %{name} -d
+%define major 1
+%define libname %mklibname %{name} %{major}
+%define develname %mklibname %{name} -d
 
 Summary:	Fast compression and decompression library
 Name:		snappy
-Version:	1.1.3
+Version:	1.1.7
 Release:	1
 Group:		System/Libraries
 License:	BSD
