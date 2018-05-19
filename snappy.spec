@@ -10,8 +10,11 @@ Group:		System/Libraries
 License:	BSD
 URL:		http://google.github.io/snappy/
 Source0:	http://github.com/google/snappy/releases/download/%{version}/%{name}-%{version}.tar.gz
-
+Patch0:		snappy-1.1.7-compile.patch
+BuildRequires:	cmake ninja
 BuildRequires:	gtest-devel
+BuildRequires:	pkgconfig(lzo2)
+BuildRequires:	pkgconfig(zlib)
 
 %description
 Snappy is a compression/decompression library. It does not aim for maximum 
@@ -47,27 +50,22 @@ This package contains libraries and header files for developing applications
 that use %{name}.
 
 %prep
-%setup -q
-
-# Avoid automagic lzo and gzip by not checking for it
-sed -i '/^CHECK_EXT_COMPRESSION_LIB/d' configure.ac || die
-# don't install unwanted files
-sed -i 's/COPYING INSTALL//' Makefile.am || die
+%autosetup -p1
+%cmake \
+	-DBUILD_SHARED_LIBS:BOOL=ON \
+	-G Ninja
 
 %build
-autoreconf -fiv
-%configure
-%make
+%ninja_build -C build
 
 %install
-%makeinstall_std
-rm -rf %{buildroot}%{_datadir}/doc/snappy/
+%ninja_install -C build
 
 %files -n %{libname}
 %{_libdir}/libsnappy.so.%{major}*
 
 %files -n %{develname}
-%doc AUTHORS ChangeLog NEWS README
 %doc format_description.txt
 %{_includedir}/snappy*.h
 %{_libdir}/libsnappy.so
+%{_libdir}/cmake/Snappy

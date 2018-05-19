@@ -1,0 +1,12 @@
+diff -up snappy-1.1.7/CMakeLists.txt.omv~ snappy-1.1.7/CMakeLists.txt
+--- snappy-1.1.7/CMakeLists.txt.omv~	2018-05-19 10:42:44.924145289 +0200
++++ snappy-1.1.7/CMakeLists.txt	2018-05-19 10:44:07.986222707 +0200
+@@ -118,7 +118,7 @@ if(SNAPPY_BUILD_TESTS)
+       "${PROJECT_SOURCE_DIR}/snappy-test.cc"
+   )
+   target_compile_definitions(snappy_unittest PRIVATE -DHAVE_CONFIG_H)
+-  target_link_libraries(snappy_unittest snappy ${GFLAGS_LIBRARIES})
++  target_link_libraries(snappy_unittest snappy gtest)
+ 
+   if(HAVE_LIBZ)
+     target_link_libraries(snappy_unittest z)
