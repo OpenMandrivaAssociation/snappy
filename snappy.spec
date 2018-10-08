@@ -5,13 +5,18 @@
 Summary:	Fast compression and decompression library
 Name:		snappy
 Version:	1.1.7
-Release:	1
+Release:	2
 Group:		System/Libraries
 License:	BSD
 URL:		http://google.github.io/snappy/
 Source0:	http://github.com/google/snappy/releases/download/%{version}/%{name}-%{version}.tar.gz
-Patch0:		snappy-1.1.7-compile.patch
-BuildRequires:	cmake ninja
+# add missing dependency on gtest to snappy_unittest
+Patch0:		%{name}-gtest.patch
+# fix version macros in snappy-stubs-public.h.in (BZ #1527850)
+Patch1:		%{name}-version-macros.patch
+
+BuildRequires:	cmake
+BuildRequires:	ninja
 BuildRequires:	gtest-devel
 BuildRequires:	pkgconfig(lzo2)
 BuildRequires:	pkgconfig(zlib)
@@ -61,6 +66,22 @@ that use %{name}.
 %install
 %ninja_install -C build
 
+# create pkgconfig file
+cat << EOF >snappy.pc
+prefix=%{_prefix}
+exec_prefix=%{_exec_prefix}
+includedir=%{_includedir}
+libdir=%{_libdir}
+
+Name: %{name}
+Description: A fast compression/decompression library
+Version: %{version}
+Cflags: -I\${includedir}
+Libs: -L\${libdir} -lsnappy
+EOF
+
+install -m644 -D snappy.pc %{buildroot}%{_libdir}/pkgconfig/snappy.pc
+
 %files -n %{libname}
 %{_libdir}/libsnappy.so.%{major}*
 
@@ -69,3 +90,4 @@ that use %{name}.
 %{_includedir}/snappy*.h
 %{_libdir}/libsnappy.so
 %{_libdir}/cmake/Snappy
+%{_libdir}/pkgconfig/snappy.pc
