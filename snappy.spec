@@ -8,7 +8,7 @@ Version:	1.1.7
 Release:	4
 Group:		System/Libraries
 License:	BSD
-URL:		http://google.github.io/snappy/
+URL:		https://google.github.io/snappy/
 Source0:	http://github.com/google/snappy/releases/download/%{version}/%{name}-%{version}.tar.gz
 # add missing dependency on gtest to snappy_unittest
 Patch0:		%{name}-gtest.patch
